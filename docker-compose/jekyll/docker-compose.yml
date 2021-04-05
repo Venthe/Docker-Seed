@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  jekyll-build:
+    volumes:
+      - "./:/site"
+    image: bretfisher/jekyll:4.0
+    command: [ "build ." ]
+
+  jekyll-serve:
+    ports:
+      - "8080:4000"
+    volumes:
+      - "./:/site"
+    image: bretfisher/jekyll-serve
