@@ -1,0 +1,19 @@
+version: "3.2"
+services:
+  # https://hub.docker.com/_/postgres
+  database:
+    image: "docker.io/postgres:13.2"
+    restart: "always"
+    # ports:
+    #   - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+      # Fixes problems with file ownership on windows bind mounts
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    # volumes:
+    #   - "pgdata:/var/lib/postgresql/data"
+
+volumes:
+  pgdata: {}
