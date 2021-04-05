@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  redis:
+    # volumes:
+    #   - 'redis_data:/data'
+    image: redis-server:6.2.1-alpine3.13
+    # ports:
+    #   - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+# volumes:
+#   redis_data: {}
