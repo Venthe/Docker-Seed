@@ -63,3 +63,14 @@ services:
       - kafka
     ports:
       - "9001:9000"
+
+  kafka_manager:
+    extends:
+      service: kafka_manager
+      file: ../kafka-manager/docker-compose.yml
+    environment:
+      ZK_HOSTS: zookeeper_1:2181,zookeeper_2:2181,zookeeper_3:2181
+    depends_on:
+      - zookeeper
+    ports:
+      - "9002:9000"

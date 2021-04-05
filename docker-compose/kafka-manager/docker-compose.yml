@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  # https://hub.docker.com/r/hlebalbau/kafka-manager
+  kafka_manager:
+    image: hlebalbau/kafka-manager:3.0.0.5
+    # ports:
+    #   - "9000:9000"
+    environment:
+      ZK_HOSTS: "zookeeper:2181"
+      APPLICATION_SECRET: "random-secret"
+    #  KAFKA_MANAGER_AUTH_ENABLED: "true"
+    #  KAFKA_MANAGER_USERNAME: admin
+    #  KAFKA_MANAGER_PASSWORD: secret
+    # depends_on:
+    #   - zookeeper
