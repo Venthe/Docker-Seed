@@ -14,6 +14,7 @@ services:
       PGDATA: "/var/lib/postgresql/data/pgdata"
     # volumes:
     #   - "pgdata:/var/lib/postgresql/data"
+    #   - ./init.sql:/docker-entrypoint-initdb.d/
 
   # https://hub.docker.com/r/dpage/pgadmin4
   pgadmin:
