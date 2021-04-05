@@ -5,6 +5,8 @@ services:
     ports:
       - "389:389"
       - "636:636"
+    command:
+      - "-l debug"
     environment:
       - LDAP_ORGANISATION=Sample
       - LDAP_DOMAIN=sample.com
