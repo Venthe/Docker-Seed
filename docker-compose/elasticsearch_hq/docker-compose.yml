@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  # https://hub.docker.com/r/elastichq/elasticsearch-hq
+  elasticsearch_hq:
+    image: docker.io/elastichq/elasticsearch-hq:release-v3.5.12
+    environment:
+      HOST: localhost
+      ES_HOST: elasticsearch
+      HQ_DEFAULT_URL: http://elasticsearch:9200
+    # ports:
+    #   - '5000:5000'
+    # depends_on:
+    #   - elasticsearch

@@ -30,5 +30,5 @@ services:
     depends_on:
       - elasticsearch
 
-# volumes:
-#   elasticsearch_data: {}
+volumes:
+  elasticsearch_data: {}
