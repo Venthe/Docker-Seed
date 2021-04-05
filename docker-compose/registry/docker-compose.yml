@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  registry:
+    image: "registry:2"
+    ports:
+      - "5000:5000"
+
+  registry_proxy:
+    image: "nginx:1.19.6"
+    depends_on:
+      - "registry"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/config:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/ssl/private
