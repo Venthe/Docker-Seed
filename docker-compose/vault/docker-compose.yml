@@ -17,3 +17,12 @@ services:
     - 8200:8200
     volumes:
       - "./vault/:/mnt/init"
+
+  vault_ui:
+    extends:
+      service: vault_ui
+      file: ../vault_ui/docker-compose.yml
+    ports:
+      - '8000:8000'
+    depends_on:
+      - vault
