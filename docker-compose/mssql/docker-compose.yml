@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  mssql:
+    # ports:
+    #   - '1433:1433'
+    image: mcr.microsoft.com/mssql/server:2019-CU9-ubuntu-16.04
+    # volumes:
+    #   - mssql_data:/var/opt/mssql
+    #   - ./init.sh:/usr/local/bin/init.sh
+    #   - ./init.sql:/init.sql
+    # entrypoint:
+    #   - init.sh
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=yourStrong(!)Password1
+      - MSSQL_PID=Developer
+
+# volumes:
+#   mssql_data: {}
