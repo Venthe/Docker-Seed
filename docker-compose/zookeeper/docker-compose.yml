@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+
+  zoonavigator:
+    extends:
+      file: ../zoonavigator/docker-compose.yml
+      service: zoonavigator
+    depends_on:
+      - zookeeper
+    ports:
+      - "9000:9000"
+
+  zookeeper:
+    extends:
+      file: load-balancer-service.yml
+      service: zookeeper_load_balancer
+    depends_on:
+      - zookeeper_1
+      - zookeeper_2
+      - zookeeper_3
+    ports:
+      - "2181:2181"
+      - "8080:8080"
+
+  zookeeper_1:
+    extends:
+      file: zookeeper-service.yml
+      service: zookeeper
+    hostname: zookeeper_1
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zookeeper_2:2888:3888;2181 server.3=zookeeper_3:2888:3888;2181
+
+  zookeeper_2:
+    extends:
+      file: zookeeper-service.yml
+      service: zookeeper
+    hostname: zookeeper_2
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper_1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper_3:2888:3888;2181
+
+  zookeeper_3:
+    extends:
+      file: zookeeper-service.yml
+      service: zookeeper
+    hostname: zookeeper_3
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper_1:2888:3888;2181 server.2=zookeeper_2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181

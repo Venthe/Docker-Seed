@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+
+  # https://hub.docker.com/_/zookeeper
+  zookeeper:
+    image: 'docker.io/zookeeper:3.6.2'
+    restart: always
+    # volumes:
+    #   - data:/datalog
+    #   - data:/data
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: 'server.1=0.0.0.0:2888:3888;2181'
+
+# volumes:
+#   datalog: {}
+#   data: {}
