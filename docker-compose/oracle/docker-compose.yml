@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  # https://hub.docker.com/r/oracleinanutshell/oracle-xe-11g
+  oracle:
+    # ports:
+    #   - '1521:1521'
+    #   - '5500:5500'
+    image: oracleinanutshell/oracle-xe-11g:1.0.0
+    # volumes:
+    #   - oracle_data:/var/opt/oracle
+    #   - ./init.sql:/docker-entrypoint-initdb.d/
+
+# volumes:
+#   oracle_data: {}
