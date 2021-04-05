@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  docker:
+    # image: docker:20.10.0-dind
+    build:
+      context: .
+    # depends_on:
+    # - "registry"
+    # - "registry_proxy"
+    privileged: true
+    # volumes:
+    # - ./ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+    command:
+      - "--registry-mirror=https://registry"
+      - "--registry-mirror=https://nexus"
+      - "--debug"
