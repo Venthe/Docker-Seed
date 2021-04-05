@@ -1,0 +1,15 @@
+version: "3.2"
+services:
+  open_project:
+    image: docker.io/openproject/community:11
+    volumes:
+      - pgdata:/var/openproject/pgdata
+      - assets:/var/openproject/assets
+    environment:
+      SECRET_KEY_BASE: secret
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata: {}
+  assets: {}
