@@ -1,0 +1,7 @@
+version: "3.2"
+services:
+  adminer:
+    image: 'plantuml/plantuml-server:jetty'
+    restart: always
+    ports:
+      - 8080:8080
