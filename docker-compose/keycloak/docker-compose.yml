@@ -1,0 +1,28 @@
+# Requires PostgreSQL
+version: "3.2"
+services:
+  keycloak:
+    image: "jboss/keycloak:12.0.4"
+    restart: "on-failure"
+    command:
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=dir"
+      - "-Dkeycloak.migration.dir=/config/"
+      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
+    volumes:
+      - "./keycloak/:/config/"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      DB_VENDOR: postgres
+      DB_PORT: 5432
+      DB_USER: <POSTGRES_USER>
+      DB_PASSWORD: <POSTGRES_PASSWORD>
+      DB_ADDR: <POSTGRES_HOST>
+      DB_DATABASE: <POSTGRES_DATABASE>
+      # KEYCLOAK_STATISTICS: [all|[jgroups,db,http]
+      KEYCLOAK_STATISTICS: db,http
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
