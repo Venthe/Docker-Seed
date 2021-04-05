@@ -15,5 +15,14 @@ services:
     # volumes:
     #   - "pgdata:/var/lib/postgresql/data"
 
+  # https://hub.docker.com/r/dpage/pgadmin4
+  pgadmin:
+    extends:
+      service: pgadmin
+      file: ../pgadmin/docker-compose.yml
+    ports:
+      - "8080:8080"
+      - "443:443"
+
 volumes:
   pgdata: {}
