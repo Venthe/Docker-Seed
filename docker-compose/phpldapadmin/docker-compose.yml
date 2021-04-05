@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  phpldapadmin:
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
+    image: 'osixia/phpldapadmin:0.9.0'
+    # depends_on:
+    #   - openldap
+    # ports:
+    #   - '443:443'
+    #   - '80:80'

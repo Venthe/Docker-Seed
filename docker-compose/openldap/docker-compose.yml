@@ -1,6 +1,6 @@
 version: "3.6"
 services:
-  ldap:
+  openldap:
     image: osixia/openldap:1.5.0
     ports:
       - "389:389"
@@ -11,3 +11,13 @@ services:
       - LDAP_ADMIN_PASSWORD=admin
     volumes:
       - ./01.ldif:/container/service/slapd/assets/config/bootstrap
+
+  phpldapadmin:
+    extends:
+      file: ../phpldapadmin/docker-compose.yml
+      service: phpldapadmin
+    depends_on:
+      - openldap
+    ports:
+      - '443:443'
+      - '80:80'
