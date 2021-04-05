@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  dokuwiki:
+    image: 'docker.io/bitnami/dokuwiki:20200729.0.0-debian-10-r210'
+    restart: always
+    environment:
+      ALLOW_EMPTY_PASSWORD: true
+      DOKUWIKI_USERNAME: admin
+      DOKUWIKI_PASSWORD: admin
+      DOKUWIKI_WIKI_NAME: <Wiki name>
+      DOKUWIKI_EMAIL: <Wiki email>
+      DOKUWIKI_FULL_NAME: <Wiki full name>
+      PHP_MEMORY_LIMIT: 512m
+    ports:
+      - 8080:8080
+    volumes:
+      - 'dokuwiki:/bitnami/dokuwiki'
+
+volumes:
+  dokuwiki: {}
