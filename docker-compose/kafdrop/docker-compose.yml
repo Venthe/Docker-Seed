@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+
+  # https://hub.docker.com/r/obsidiandynamics/kafdrop
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    restart: "unless-stopped"
+    # ports:
+    #   - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+    # depends_on:
+    #   - kafka

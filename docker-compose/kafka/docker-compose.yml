@@ -54,3 +54,12 @@ services:
       - kafka_replica
     ports:
       - "9092:9092"
+
+  kafdrop:
+    extends:
+      service: kafdrop
+      file: ../kafdrop/docker-compose.yml
+    depends_on:
+      - kafka
+    ports:
+      - "9001:9000"
