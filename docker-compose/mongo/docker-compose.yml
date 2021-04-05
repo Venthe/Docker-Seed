@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+  # https://hub.docker.com/_/mongo
+  mongo:
+    ports:
+      - "27017:27017"
+    restart: always
+    image: docker.io/library/mongo:4.4.4
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    # volumes:
+    #   - mongo_data:/data/db
+    #   - init.js:/docker-entrypoint-initdb.d/
+
+# volumes:
+#   mongo_data: {}
