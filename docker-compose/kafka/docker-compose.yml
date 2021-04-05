@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+
+  zoonavigator:
+    extends:
+      service: zoonavigator
+      file: ../zoonavigator/docker-compose.yml
+    depends_on:
+      - zookeeper
+    ports:
+      - 9000:9000
+
+  zookeeper_1:
+    extends:
+      service: zookeeper_1
+      file: ../zookeeper/docker-compose.yml
+
+  zookeeper_2:
+    extends:
+      service: zookeeper_2
+      file: ../zookeeper/docker-compose.yml
+
+  zookeeper_3:
+    extends:
+      service: zookeeper_3
+      file: ../zookeeper/docker-compose.yml
+
+  zookeeper:
+    extends:
+      file: ../zookeeper/load-balancer-service.yml
+      service: zookeeper_load_balancer
+    depends_on:
+      - zookeeper_1
+      - zookeeper_2
+      - zookeeper_3
+    ports:
+      - "2181:2181"
+      - "8080:8080"
+
+  kafka_replica:
+    extends:
+      service: kafka
+      file: ./kafka-service.yml
+    deploy:
+      replicas: 3
+    depends_on:
+      - zookeeper
+
+  kafka:
+    extends:
+      service: kafka_load_balancer
+      file: ./load-balancer-service.yml
+    depends_on:
+      - kafka_replica
+    ports:
+      - "9092:9092"

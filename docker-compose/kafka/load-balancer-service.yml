@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  kafka_load_balancer:
+    extends:
+      service: nginx
+      file: ../nginx/docker-compose.yml
+    volumes:
+      - ./load-balancer.conf:/etc/nginx/nginx.conf:ro
+    # ports:
+    #   - "9092:9092"
