@@ -1,0 +1,21 @@
+# Requires PostgreSQL version 11
+version: '3.2'
+services:
+  redmine:
+    image: docker.io/redmine:4.1.2
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    environment:
+      REDMINE_DB_POSTGRES: database
+      REDMINE_DB_PASSWORD: <Database password>
+      REDMINE_DB_USERNAME: <Database user>
+      REDMINE_DB_NAME: <Database name>
+      REDMINE_SECRET_KEY_BASE: supersecretkey
+    volumes:
+      - redmine:/usr/src/redmine/files
+
+volumes:
+  redmine: {}
