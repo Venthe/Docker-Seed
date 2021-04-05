@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+
+  # https://hub.docker.com/elkozmon/zoonavigator
+  zoonavigator:
+    ports:
+      - 9000:9000
+    environment:
+      HTTP_PORT: 9000
+    restart: unless-stopped
+    image: 'docker.io/elkozmon/zoonavigator:1.1.0'
