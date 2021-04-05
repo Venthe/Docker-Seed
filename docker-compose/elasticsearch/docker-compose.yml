@@ -1,9 +1,9 @@
 version: '3.7'
 services:
   elasticsearch:
-    ports:
-      - '9200:9200'
-      - '9300:9300'
+    # ports:
+    #   - '9200:9200'
+    #   - '9300:9300'
     image: elasticsearch:7.12.0
     ulimits:
       memlock:
