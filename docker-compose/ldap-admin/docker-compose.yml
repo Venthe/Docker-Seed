@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  ldap-admin:
+    image: docker.io/osixia/phpldapadmin:0.9.0
+    # ports:
+    #   - "443:443"
+    # environment:
+    #   - PHPLDAPADMIN_LDAP_HOSTS=ldap
