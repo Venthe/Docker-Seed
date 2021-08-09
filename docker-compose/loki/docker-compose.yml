@@ -1,6 +1,8 @@
 version: '3.3'
 services:
   loki:
+    image: docker.io/grafana/loki:2.2.1
+    hostname: loki
     ports:
-      - '3100:3100'
-    image: grafana/loki:2.2.0
+      - target: 3100
+        published: 3100
