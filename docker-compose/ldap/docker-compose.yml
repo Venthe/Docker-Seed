@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  ldap:
+    image: docker.io/osixia/openldap:1.5.0
+    # ports:
+    #   - "389:389"
+    #   - "636:636"
+    # environment:
+    #   - LDAP_ADMIN_PASSWORD=secret
+    # volumes:
+    #   - openldap-var:/var/lib/ldap
+    #   - openldap-etc:/etc/ldap/slapd.d
+
+volumes:
+  openldap-var: {}
+  openldap-etc: {}
