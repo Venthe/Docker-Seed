@@ -1,0 +1,4 @@
+{
+  "service_name": "manager",
+  "collector_host": "zipkin"
+}
