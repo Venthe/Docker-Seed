@@ -1,0 +1,40 @@
+version: "3"
+services:
+  # sysctl -w vm.max_map_count=524288
+  # sysctl -w fs.file-max=131072
+  # ulimit -n 131072
+  # ulimit -u 8192
+  # See for clustering
+  # https://github.com/opensearch-project/opensearch-build/blob/main/release/docker/dockercomposefiles/docker-compose.yml
+  opensearch:
+    image: docker.io/opensearchproject/opensearch:1.0.0
+    ports:
+      - 9200:9200
+      - 9600:9600
+    environment:
+      discovery.type: single-node
+      # along with the memlock settings below, disables swapping
+      bootstrap.memory_lock: true
+      # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+
+  opensearch-dashboards:
+    extends:
+      service: opensearch-dashboards
+      file: ../opensearch-dashboards/docker-compose.yml
+    ports:
+      - 5601:5601
+    depends_on:
+      - opensearch
+
+volumes:
+  opensearch_data: {}
