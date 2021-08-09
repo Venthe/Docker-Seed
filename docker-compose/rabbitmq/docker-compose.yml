@@ -1,11 +1,16 @@
 version: "3.2"
 services:
   # https://hub.docker.com/_/rabbitmq
-  rabbitmq:
-    image: rabbitmq:3.8.14-management-alpine
+    image: docker.io/library/rabbitmq:3.9-management-alpine
+    hostname: rabbitmq
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "8082:8080"
+      # Management
+      - "15672:15672"
+      - "15671:15671"
+      # Prometheus
+      - "15692:15692"
+      - "5672:5672"
     volumes:
       - data:/var/lib/rabbitmq/
       - log:/var/log/rabbitmq
