@@ -2,8 +2,15 @@ version: '3.7'
 services:
   # https://hub.docker.com/r/prom/prometheus
   prometheus:
-    image: prom/prometheus:v2.26.0
-    # ports:
-    #   - 9090:9090
+    image: docker.io/prom/prometheus:v2.28.1
+    hostname: prometheus
+    command:
+      - --web.enable-lifecycle
+      - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - type: bind
+        source: ./prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+    # ports:
+    #   - target: 9090
+    #     published: 9090
