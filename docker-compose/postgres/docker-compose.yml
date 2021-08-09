@@ -2,7 +2,7 @@ version: "3.2"
 services:
   # https://hub.docker.com/_/postgres
   database:
-    image: "docker.io/postgres:13.2"
+    image: "docker.io/postgres:13.3-alpine"
     restart: "always"
     # ports:
     #   - "5432:5432"
