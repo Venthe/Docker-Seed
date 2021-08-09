@@ -11,8 +11,22 @@ services:
   grafana:
     depends_on:
       - prometheus
-    image: grafana/grafana:7.5.2
+    image: docker.io/grafana/grafana:8.1.0
     volumes:
+      # Interesting paths
+      # GF_PATHS_CONFIG         /etc/grafana/grafana.ini
+      # GF_PATHS_DATA           /var/lib/grafana
+      # GF_PATHS_HOME           /usr/share/grafana
+      # GF_PATHS_LOGS           /var/log/grafana
+      # GF_PATHS_PLUGINS        /var/lib/grafana/plugins
+      # GF_PATHS_PROVISIONING   /etc/grafana/provisioning
+      # database and plugins
+#      - type: volume
+#        source: grafanaStorage
+#        target: /var/lib/grafana
+      - type: bind
+        source: ./grafana.ini
+        target: /etc/grafana/grafana.ini
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./dashboards/:/etc/dashboards/
       - ./dashboards.yml/:/etc/grafana/provisioning/dashboards/dashboards.yml
