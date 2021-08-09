@@ -1,14 +1,53 @@
 version: '3.7'
 services:
-
   gerrit:
+    image: docker.io/gerritcodereview/gerrit:3.4.0
     ports:
-      - "8082:8080"
+      # Web UI
+      - "8080:8080"
+      # SSH
       - "29418:29418"
     volumes:
+      - ./gerrit.config:/var/gerrit/etc/gerrit.config
+      - ./secure.config:/var/gerrit/etc/secure.config
       - gerrit-git-volume:/var/gerrit/git
       - gerrit-index-volume:/var/gerrit/index
       - gerrit-cache-volume:/var/gerrit/cache
-    image: gerritcodereview/gerrit:latest
+      # - /external/gerrit/etc:/var/gerrit/etc
+      # - /external/gerrit/db:/var/gerrit/db
     environment:
-      - CANONICAL_WEB_URL=http://192.168.99.100
+      - CANONICAL_WEB_URL=http://host.docker.internal
+    depends_on:
+      - ldap
+    # command: init
+
+  ldap-admin:
+    extends:
+      service: ldap-admin
+      file: ../ldap-admin/docker-compose.yml
+    ports:
+      - "443:443"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap
+    depends_on:
+      - ldap
+
+  ldap:
+    extends:
+      service: ldap
+      file: ../ldap/docker-compose.yml
+    ports:
+      - "389:389"
+      - "636:636"
+    environment:
+      - LDAP_ADMIN_PASSWORD=secret
+    volumes:
+      - openldap-var:/var/lib/ldap
+      - openldap-etc:/etc/ldap/slapd.d
+
+volumes:
+  openldap-var: { }
+  openldap-etc: { }
+  gerrit-git-volume: { }
+  gerrit-index-volume: { }
+  gerrit-cache-volume: { }
