@@ -2,11 +2,11 @@
 version: "3.2"
 services:
   jira:
-    image: "docker.io/atlassian/jira-software:8.16.0-jdk11"
+    image: "docker.io/atlassian/jira-software:8.19.0-EAP01-jdk11"
     volumes:
       - "jira:/var/atlassian/application-data/jira"
-      ports:
-        - "8080:8080"
+    ports:
+      - "8080:8080"
     depends_on:
       - database
 
